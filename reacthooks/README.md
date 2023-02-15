@@ -13,9 +13,9 @@
 |[useMemo](#useMemo)|Pode ser usado para garantir a referência de um objeto|
 |[useLayoutEffect](#useLayoutEffect)|Usado como useEffect porém executa antes de renderizar a página|
 |[useImperativeHandle](#useImperativeHandle)|Passar funções do componente filho para o componente pai|
-|[Custom_Hooks](#Custom Hooks)|Funções que nós mesmos criamos e queremos reutilizar|
+|[customHooks](#Custom Hooks)|Funções que nós mesmos criamos e queremos reutilizar|
 |[useDebugValue](#useDebugValue)|Cria um log e ajuda a depurar o código, necessário instalar react dev tools no navegador|
-|[React_Dev_Tools](#React Dev Tools)|Ferramenta para visualizar os hooks no navegador|
+|[ReactDevTools](#React Dev Tools)|Ferramenta para visualizar os hooks no navegador|
 
 ## useState
 
