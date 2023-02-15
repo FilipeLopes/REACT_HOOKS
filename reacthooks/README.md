@@ -4,6 +4,7 @@
 
 |Nome| Útil para|
 |----|----------|
+|useState|Declaração de variáveis capazes de re-renderizar|
 
 1. useState
 2. useReducer
