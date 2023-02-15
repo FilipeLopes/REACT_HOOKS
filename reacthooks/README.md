@@ -1,97 +1,97 @@
-# Anotações sobre hooks do react
+# Notations about React Hooks
 
-## Hooks e recursos abordados
+## Approached hooks and functions
 
 |Nome| Função|
 |----|----------|
-|[useState](#useState)|Declaração de variáveis capazes de re-renderizar|
-|[useReducer](#useReducer)|Manipula o estado através de uma função que criamos|
-|[useEffect](#useeffect)|Usado para controlar quantas vezes algo acontece|
-|[useContext](#useContext)|Permite passar informações de um componente para outros por contexto|
-|[useRef](#useRef)|Usado para armazenar o valor de uma variável sem provocar re-renderização e para acessar elementos da DOM|
-|[useCallback](#useCallback)|Usado para memorizar funções, bom para performance|
-|[useMemo](#useMemo)|Pode ser usado para garantir a referência de um objeto|
-|[useLayoutEffect](#useLayoutEffect)|Usado como useEffect porém executa antes de renderizar a página|
-|[useImperativeHandle](#useImperativeHandle)|Passar funções do componente filho para o componente pai|
-|[Custom Hooks](#CustomHooks)|Funções que nós mesmos criamos e queremos reutilizar|
-|[useDebugValue](#useDebugValue)|Cria um log e ajuda a depurar o código, necessário instalar react dev tools no navegador|
-|[React Dev Tools](#ReactDevTools)|Ferramenta para visualizar os hooks no navegador|
+|[useState](#useState)|Declare variables able to re-render|
+|[useReducer](#useReducer)|Manipulate the state through a function that we have created|
+|[useEffect](#useeffect)|Used to control how many times something happens|
+|[useContext](#useContext)|Allows you to pass info from a component to others by context|
+|[useRef](#useRef)|Used to store a variable value without re-render and to access DOM elements|
+|[useCallback](#useCallback)|Used to memorize functions. Good to increase performance|
+|[useMemo](#useMemo)|Can be used to ensure the object reference|
+|[useLayoutEffect](#useLayoutEffect)|Used like useEffect. However, it render before the page shows up|
+|[useImperativeHandle](#useImperativeHandle)|Pass functions from children component to father component|
+|[Custom Hooks](#CustomHooks)|Functions created by ourselves|
+|[useDebugValue](#useDebugValue)|Create a log to help debugging codes. React Dev Tools needs to be installed|
+|[React Dev Tools](#ReactDevTools)|Tool to visualize hooks in browser|
 
 ## useState
 
-- Permite gerenciar valores, podendo fazer consulta ou alterações de valor;
-- Ele permite re-rendenrizar um componente, diferente de manipulação com variáveis;
+- Allows managing states (similar to variables). Being able to make queries or value changes;
+- Allows to re-render a component. Which is different to variable manipulation;
 
-**Declarando um useState**
+**Declaring a useState**
 
 ```const [name, setName] = useState("");```
 
-**Atrelando useState e inputs**
+**Linking useState to inputs**
 
-- Ajuda na criação de formulários passando os valores do input para o useState através do evento onChange;
-- Nesse caso a cada mudança no input o evento onChange altera o valor do useState re-renderizando em tempo real;
+- It helps to create forms. Transferring values from input to useState through event onChange;
+- Each input change the event onChange changes the value from useState re-rendering in real time;
 
-**Controlando useState dentro do input**
+**Controlling useState inside the input**
 
 ```<input type="text" value={name} onChange={(e) => setNome(e.target.value)} />```
 
 ## useReducer
 
-- Tem a mesma função que o useState de gerenciar valores, porém podemos **executar uma função** na hora de alterar o valor;
-- O useReducer recebe um **valor** para gerenciar e uma **função** para alterar este valor;
+- It has the same function as useState to manage values, but we can **run a function** when changing the value;
+- The useReducer gets a **value** to manage and a **function** to change it;
 
-**Declarando um useReducer**
+**Declaring a useReducer**
 
 ```
 const [number, dispatch] = useReducer((state, action) => {
-        // - number é o nome do state
-        // - dispatch é o nome de onde executaremos a função para alterar o valor de number
-        // - useReducer espera os argumentos state e action
-        // - state é a referencia para o valor de number
-        // - action é uma ação que pode ser usada ou não
+        // - number is the state name
+        // - dispatch is the name where we will execute the function to change the value of number
+        // - useReducer waits for the arguments state and action
+        // - state is the reference to the value of number
+        // - action is an action that can be used or not
 })
 ```
-**Executando o useReducer**
+**Running theuseReducer**
 
-- Para executar esse useReducer devemos usar a função **dispatch**
+- To execute this useReducer we must use the function **dispatch**
 
-```<button onClick={dispatch}>Chamar função</button>```
+```<button onClick={dispatch}>Call function</button>```
 
-### useReducer com action
+### useReducer with action
 
-- Podemos utilizar o useReducer com **operações mais complexas** e para isso usamos a estrutura **switch com actions**;
+- We can use the useReducer with **more complex operations** and for this we use the **switch with actions** structure;
 
 ```
     const initialTasks = [
-        { id: 1, text: "Fazer alguma coisa" },
-        { id: 2, text: "Fazer outra coisa" },
+        { id: 1, text: "Do something" },
+        { id: 2, text: "Do other thing" },
     ];
 
-    //Cria o useReducer sem o state declarado e adiciona os cases
+    //Create the useReducer without the declared state and add the cases
     const taskReducer = (state, action) => {
         switch (action.type) {
             case "ADD":
-            //Executa algo se o action.type for ADD
+            //Execute something if action.type for ADD
             return;
 
             case "REMOVE":
-            //Executa algo se o action.type for REMOVE
+            //Execute something if action.type for REMOVE
             return;
             default:
             return state;
         }
     };
-    //Cria um useState para ser manipulado pela função dispatch
+    //Creates a useState to be manipulated by the dispatch
     const [taskText, setTaskText] = useState("");
-    //Cria o useReducer passando o reducer switch e as variaveis que manipula
+    //Create the useReducer passing the reducer switch and the variables it manipulates
     const [tasks, dispatchTask] = useReducer(taskReducer, initialTasks);
 
-    //Executa o metodo dispatch com o type ="ADD"
+    //Run the dispatch method with the type ="ADD"
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatchTask({ type: "ADD" });
     };
-    //Executa o metodo dispatch com o type ="REMOVE"
+    //Run the dispatch method with the type ="REMOVE"
     const removeTask = (id) => {
         dispatchTask({ type: "REMOVE", id: id });
     };
@@ -99,77 +99,77 @@ const [number, dispatch] = useReducer((state, action) => {
 
 ## useEffect
 
-- Junto do useState é um dos hooks mais utilizados;
-- Permite realizar alterações na **DOM** e requisições **HTTP**;
-- O objetivo ao usar useEffect é **Controlar quantas vezes algo acontece**;
-- É formado por uma **função** a ser executada e um **array** de dependências;
+- Along with useState it is one of the most used hooks;
+- It allows you to make changes to the **DOM** and **HTTP** requests;
+- The purpose of using useEffect is to **Control how many times something happens**;
+- It consists of a **function** to be executed and an **array** of dependencies;
 
-### useEffect sem array de dependências
+### useEffect without dependency array
 
-- Sempre que renderizar o componente que este useEffect está ele executará;
+- Whenever you render the component that this useEffect is on it will execute;
 
-**Declarando o useEffect sem dependências** 
+**Declaring the useEffect without dependencies**.
 
 ```
     useEffect(() => {
-        console.log("Estou sendo executado!");
+        console.log("I'm running!");
     });
 ```
 
-### useEffect com array vazio
+### useEffect with empty array
 
-- Ao deixar o array de dependências do useEffect vazio o useEffect executara apenas uma vez ao renderizar;
+- By leaving the dependency array of the useEffect empty the useEffect will execute only once when rendering;
 
-**Declarando o useEffect com dependência vazia**
+**Declaring the useEffect with an empty dependency**
 
 ```
     useEffect(() => {
-        console.log("Estou sendo executado!");
-    },[]);//Array de dependências vazio
+        console.log("I'm running!");
+    },[]);//Empty dependency array
 ```
 
-### useEffect com array de dependências
+### useEffect with dependency array
 
-- Neste caso o useEffect fica monitorando um item e se caso este item for alterado o useEffect é executado;
-- Isso da um maior controle de quando a função deve ser executada;
+- In this case, the useEffect monitors one item and if this item changes, the useEffect is executed;
+- This gives more control on when the function should be executed;
 
-**Declarando o useEffect com array de dependência**
+## Declaring the useEffect with dependency array
 
 ```
     cosnt [number, setNumber] = useState(0);
     useEffect(() => {
         console.log(number);
-    },[number]); //useEffect monitora number e quando ele for alterado ele vai executar
+    },[number]); //useEffect monitors number and when it changes it will execute
 ```
 
-### CleanUp do useEffect
+### Cleanup of useEffect
 
-- Alguns efeitos precisam ter uma técnica de cleanup para garantir o funcionamento;
-- Não fazer isso pode gerar um comportamento indesejado;
-- Exemplo: um timeout que ao mudar de página pode continuar a ser executado pela falta de limpeza;
+- Some effects need to have a cleanup technique to ensure that they work;
+- Not doing this can generate unwanted behavior;
+- Example: a timeout that when changing pages can continue to run due to the lack of cleanup;
 
-**Declarando um CleanUp no useEffect**
+**Declaring a CleanUp in the useEffect**
 
 ```
     cosnt [number, setNumber] = useState(0);
     useEffect(() => {
-        //função para setar um timer de 2seg antes de executar
+        //function to set a 2sec timer before running
         const timer = setTimeout(() => {
             console.log("Hello World");
         }, 2000);
-        //Pausa a execução chamando a função que para o timeout
+        //Pause execution by calling the function that stops the timeout
         return () => clearTimeout(timer);
-    },[number]); //useEffect monitora number e quando ele for alterado ele vai executar
+    },[number]); //useEffect monitors number and when it changes it will execute
 ```
 
 ## useContext
 
-- É o hook utilizado para consumir um contexto, da Context API;
-- É preciso criar o **contexto** e também o **Provider** e **envolver os componentes** que receberão os valores compartilhados;
+- It is the hook used to consume a context, from the Context API;
+- You need to create the **context** and also the **Provider** and **involve the components** that will receive the shared values;
 
-**Declarando o hook nameContext**
+**Declaring the nameContext hook**
 
-1. Para começar devemos criar o arquivo nameContext.js dentro da pasta de hooks com o seguinte código:
+1. To begin we must create the file nameContext.js inside the hooks folder with the following code:
 
 ```
     import { createContext } from "react";
@@ -188,15 +188,15 @@ const [number, dispatch] = useReducer((state, action) => {
 
 ```
 
-2. No arquivo App.js devemos importar nosso nameContext;
+2. In the App.js file we must import our nameContext;
 
 ```import nameContext from './context/nameContext';```
 
-3. Encapsulamos todo o aplicativo dentro do context (se formos usar esse context em todo o app);
+3. We encapsulate the whole application inside the context (if we are going to use this context throughout the app);
 
 ```
     <div className="App">
-      //Encapsulando todos os componentes do aplicativo
+      //Encapsulating all components of the application
       <nameContext>
         <h1>React Hooks</h1>
         <BrowserRouter>
@@ -210,7 +210,7 @@ const [number, dispatch] = useReducer((state, action) => {
     </div>
 ```
 
-4. Nas páginas que esse contexto for necessário, fazer as importações e chamada;
+4. On pages where this context is needed, make the imports and call;
 
 ```
     //imports
@@ -228,48 +228,48 @@ const [number, dispatch] = useReducer((state, action) => {
 
 ## useRef
 
-- Pode ser usado como **useState** para gerenciar valores;
-- A diferença é que ele é um **objeto**, seu valor está na propriedade **current**;
-- Outra particularidade do useRef é que ele **não re-renderiza o componente** ao ser alterado;
-- o useRef pode ser colocado em um useEffect sem dependência e não causa looping infinito;
+- It can be used as a **useState** to manage values;
+- The difference is that it is an **object**, its value is in the **current** property;
+- Another particularity of useRef is that it **doesn't re-render the component** when changed;
+- useRef can be placed in a useEffect without dependency and does not cause infinite looping;
 
-**Declarando o hook useRef**
+**Declaring the useRef hook**
 
 ```
     const numberRef = useRef(0);
     
     useEffect (() => {
-        //incrementa o valor de numberRef a cada renderização do componente atual
-        //se fosse useState esse useEffect causaria uma renderização por conta própria
+        //increments the value of numberRef with each rendering of the current component
+        //if it were useState this useEffect would cause a rendering on its own
         numberRef.current = numberRef.current + 1;
     });
 ```
 
-### useRef e o DOM
+### useRef and DOM
 
-- Podemos utilizar o useRef para selecionar elementos do **JSX**;
-- Isso permite fazer **manipulações de DOM** ou aplicar **funções** como a focus;
+- We can use useRef to select elements from **JSX**;
+- This allows us to do **DOM manipulations** or apply **functions** like focus;
 
-**Declarando o hook useRef para manipular o DOM**
+**Declaring the useRef hook to manipulate the DOM**
 
 ```
-    //Declaração do useRef
+    //useRef Declaration
     const inputRef = useRef();
     const [text, setText] = useState("");
 
-    //Função chamada ao enviar o formulário
+    //Function called when sending the form
     const handleSubmit = (e) => {
         e.preventDefault();
 
         setText("");
-        //Após enviar o form e limpar o input ele vai focar no input novamente, isso acelera a digitação
-        //Existem varias outras formas de interagir com o input
+        //After sending the form and clearing the input it will focus on the input again, this speeds up typing
+        //There are many other ways to interact with the input
         inputRef.current.focus();
     };
 
     return(
         <form onSubmit={handleSubmit}>
-            //Input que o useRef monitora atravéz do ref={inputRef}
+            //Input that useRef monitors through ref={inputRef}
             <input type="text" ref={inputRef} value={text} onChange={(e) => setText(e.target.value)} />
             <input type="submit" value="Enviar" />
       </form>
@@ -278,69 +278,68 @@ const [number, dispatch] = useReducer((state, action) => {
 
 ## useCallback
 
-- Basicamente **memoriza uma função**, fazendo ela **não ser reconstruída** a cada renderização de um componente;
-- Existem dois casos para utilizarmos esse hook:
-    - O primeiro caso é quando prezamos pela **performance**, não queremos que uma função seja reconstruída toda vez;
-    - O segundo caso é quando o próprio React indica que uma função **deveria estar contida** em um useCallback para evitar
-        problemas de performance;
+- It basically **memorizes a function**, making it **not get rebuilt** each time a component is rendered;
+- There are two cases for using this hook:
+    - The first case is when we want more **performance**, we don't want a function to be rebuilt every time;
+    - The second case is when React itself indicates that a function **should be contained** in a useCallback to avoid
+        performance problems;
 
-**Declarando um useCallback**
+**Declaring a useCallback**
 
-- > Esse hook envolve várias págias e é mais fácil acompanhar olhando o código de fato
+- This hook involves several pages and is easiest to follow by looking at the actual code
 [useCalback](src/components/HookUseCallback.js)
 
 ## useMemo
 
-- Este hook pode ser usado para garantir a **referência de um objeto**;
-- Permite que algo seja atrelado a uma referência e não a um valor, isso permite **condicionarmos o useEffect a uma variável**
-    de maneira mais inteligente;
+- This hook can be used to secure the **reference of an object**;
+- Allows something to be tied to a reference rather than a value, this allows us to **condition the useEffect to a variable** in a smarter way
+    in a smarter way;
 
-**Declarando um hook useMemo**
+**Declaring a useMemo hook**
 
 ```
     const premiumNumbers = useMemo(() => {
-        //Se esse valor fosse gigante, sem o useMemo ele buscaria a cada render 
-        //Com o Memo ele traz uma vez e memoriza e so busca se a pagina re-renderizar
+        // If this value was huge, without useMemo it would fetch every render 
+        //With Memo it fetches once and memorizes and only fetches if the page re-renders
         return ["0", "100", "200"];
     }, []);
 ```
 
 ## useLayoutEffect
 
-- Parecido com o useEffect, a diferença é que esse hook roda **antes de renderizar o componente**;
-- Ou seja, é um hook **síncrono**, bloqueando o carregamento da página para o sucesso da sua funcionalidade;
-- A ideia é executar algo antes que o usuário veja a página;
+- Similar to useEffect, the difference is that this hook runs **before rendering the component**;
+- In other words, it is a **synchronous** hook, blocking the page from loading for its functionality to succeed;
+- The idea is to execute something before the user sees the page;
 
-**Declarando hooks useLayoutEffect**
+**Declaring useLayoutEffect hooks**
 
 ```
     useLayoutEffect(() => {
-        //O código aqui vai ser executado antes de renderizar o componente
+        //Code here will be executed before rendering the component
     },[]);
 ```
 
 ## useImperativeHandle
 
-- Temos como acionar ações em um outro componente de forma imperativa;
-- Como não podemos passar refs como props, precisamos usar uma função **fowardRef**;
-- Isso permite passar as referências e torna esse exemplo viável;
+- We have how to trigger actions on another component imperatively;
+- Since we can't pass refs as props, we need to use a **fowardRef** function;
+- This allows us to pass references and makes this example workable;
 
-**Declarando hooks useImperativeHandle**
+**Declaring hooks useImperativeHandle**
 
-- > Esse hook envolve várias págias e é mais fácil acompanhar olhando o código de fato
+- > This hook involves several pages and is easiest to follow by looking at the actual code
 [useImperativeHandle](src/components/HookUseImperativeHandle.js)
 
 ## CustomHooks
 
-- São os hooks que nós criamos, muitas vezes para **abstrair funções complexas do componente** ou **reaproveitar o código**;
+- These are the hooks that we create, often to **abstract complex functions of the component** or **reuse code**;
 
-**Declarando hooks custom**
+**Declaring custom hooks**
 
-1. Primeiro criar o hook custom dentro da pasta hooks usePrevious.js
-
+1. First create the custom hook inside the hooks folder usePrevious.js
 ```
     export const usePrevious = (value) => {
-        //podemos criar qualquer código aqui para ser usado depois
+        //we can create any code here to be used later
         const ref = useRef
 
         useEffect(() => {
@@ -351,7 +350,7 @@ const [number, dispatch] = useReducer((state, action) => {
     }
 ```
 
-2. Na página que usaremos este hook
+2. On the page we will use this hook
 
 ```
     //import
@@ -363,30 +362,30 @@ const [number, dispatch] = useReducer((state, action) => {
 
 ## useDebugValue
 
-- É um hook utilizado para debug;
-- Aconselhado para usar em **custom hooks**;
-- Adiciona uma área no **React Dev Tools** (Ferramenta instalada no próximo capítulo), ela estará no componente em que o
-    hook é utilizado;
+- It is a hook used for debugging;
+- Recommended for use in **custom hooks**;
+- Adds an area in the **React Dev Tools** (Tool installed in the next chapter), it will be in the component in which the
+    hook is used;
 
-**Declarando o hook**
+**Declaring the hook**
 
 ```
-    //Importar no custom hook
+    //Import into custom hook
     import {useDebugValue} from "react";
 
-    //Dentro do export do custom hook
+    // Inside the custom hook export
     useDebugValue("Imprimir o que precisar imprimir");
 ```
 
 ## ReactDevTools
 
-- É uma extensão para o navegador chrome e nela conseguimos **entender o que o react está gerando** por
-    meio do nosso código;
-- Conseguimos também verificar os states e outros parâmetros;
+- It's an extension for the chrome browser and in it we can **understand what react is generating** through our code
+    through our code;
+- We can also check the states and other parameters;
 
-**Fazendo a instalação**
+**Making the installation**
 
-1. buscar no google react dev tools
-2. instalar a extensão do chrome
-3. Colocar a extensão na página principal
-4. No F12 abrir components e é possível ver os hooks
+1. search on google react dev tools
+2. install the chrome extension
+3. Place the extension on the main page
+4. At F12 open components and you can see the hooks
