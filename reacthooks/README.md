@@ -2,22 +2,20 @@
 
 ## Hooks e recursos abordados
 
-|Nome| Útil para|
+|Nome| Função|
 |----|----------|
 |useState|Declaração de variáveis capazes de re-renderizar|
-
-1. useState
-2. useReducer
-3. useEffect
-4. useContext
-5. useRef
-6. useCallback
-7. useMemo
-8. useLayoutEffect
-9. useImperativeHandle
-10. Custom Hooks
-11. useDebugValue
-12. React Dev Tools
+|useReducer|Manipula o estado através de uma função que criamos|
+|useEffect|Usado para controlar quantas vezes algo acontece|
+|useContext|Permite passar informações de um componente para outros por contexto|
+|useRef|Usado para armazenar o valor de uma variável sem provocar re-renderização e para acessar elementos da DOM|
+|useCallback|Usado para memorizar funções, bom para performance|
+|useMemo|Pode ser usado para garantir a referência de um objeto|
+|useLayoutEffect|Usado como useEffect porém executa antes de renderizar a página|
+|useImperativeHandle|Passar funções do componente filho para o componente pai|
+|Custom Hooks|Funções que nós mesmos criamos e queremos reutilizar|
+|useDebugValue|Cria um log e ajuda a depurar o código, necessário instalar react dev tools no navegador|
+|React Dev Tools|Ferramenta para visualizar os hooks no navegador|
 
 ## useState
 
