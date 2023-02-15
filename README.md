@@ -19,4 +19,4 @@ Here you can find the following hooks:
 - Custom Hooks
 - useDebugValue
 
-> Open [this link](reacthooks/README.md) to get more info about each hook.
+> Open [here](reacthooks/README.md) to get more info about each hook.
