@@ -13,9 +13,9 @@
 |[useMemo](#useMemo)|Pode ser usado para garantir a referência de um objeto|
 |[useLayoutEffect](#useLayoutEffect)|Usado como useEffect porém executa antes de renderizar a página|
 |[useImperativeHandle](#useImperativeHandle)|Passar funções do componente filho para o componente pai|
-|[customHooks](#Custom Hooks)|Funções que nós mesmos criamos e queremos reutilizar|
+|[Custom Hooks](#CustomHooks)|Funções que nós mesmos criamos e queremos reutilizar|
 |[useDebugValue](#useDebugValue)|Cria um log e ajuda a depurar o código, necessário instalar react dev tools no navegador|
-|[ReactDevTools](#React Dev Tools)|Ferramenta para visualizar os hooks no navegador|
+|[React Dev Tools](#ReactDevTools)|Ferramenta para visualizar os hooks no navegador|
 
 ## useState
 
@@ -330,7 +330,7 @@ const [number, dispatch] = useReducer((state, action) => {
 - > Esse hook envolve várias págias e é mais fácil acompanhar olhando o código de fato
 [useImperativeHandle](src/components/HookUseImperativeHandle.js)
 
-## Custom hooks
+## CustomHooks
 
 - São os hooks que nós criamos, muitas vezes para **abstrair funções complexas do componente** ou **reaproveitar o código**;
 
@@ -378,7 +378,7 @@ const [number, dispatch] = useReducer((state, action) => {
     useDebugValue("Imprimir o que precisar imprimir");
 ```
 
-## React Dev Tools
+## ReactDevTools
 
 - É uma extensão para o navegador chrome e nela conseguimos **entender o que o react está gerando** por
     meio do nosso código;
