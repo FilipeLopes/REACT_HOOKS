@@ -4,7 +4,7 @@
 
 |Nome| Função|
 |----|----------|
-|[useState](##useState)|Declaração de variáveis capazes de re-renderizar|
+|[useState](#useState)|Declaração de variáveis capazes de re-renderizar|
 |useReducer|Manipula o estado através de uma função que criamos|
 |useEffect|Usado para controlar quantas vezes algo acontece|
 |useContext|Permite passar informações de um componente para outros por contexto|
