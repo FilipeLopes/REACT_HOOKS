@@ -5,17 +5,17 @@
 |Nome| Função|
 |----|----------|
 |[useState](#useState)|Declaração de variáveis capazes de re-renderizar|
-|useReducer|Manipula o estado através de uma função que criamos|
-|useEffect|Usado para controlar quantas vezes algo acontece|
-|useContext|Permite passar informações de um componente para outros por contexto|
-|useRef|Usado para armazenar o valor de uma variável sem provocar re-renderização e para acessar elementos da DOM|
-|useCallback|Usado para memorizar funções, bom para performance|
-|useMemo|Pode ser usado para garantir a referência de um objeto|
-|useLayoutEffect|Usado como useEffect porém executa antes de renderizar a página|
-|useImperativeHandle|Passar funções do componente filho para o componente pai|
-|Custom Hooks|Funções que nós mesmos criamos e queremos reutilizar|
-|useDebugValue|Cria um log e ajuda a depurar o código, necessário instalar react dev tools no navegador|
-|React Dev Tools|Ferramenta para visualizar os hooks no navegador|
+|[useReducer](#useReducer)|Manipula o estado através de uma função que criamos|
+|[useEffect](#useeffect)|Usado para controlar quantas vezes algo acontece|
+|[useContext](#useContext)|Permite passar informações de um componente para outros por contexto|
+|[useRef](#useRef)|Usado para armazenar o valor de uma variável sem provocar re-renderização e para acessar elementos da DOM|
+|[useCallback](#useCallback)|Usado para memorizar funções, bom para performance|
+|[useMemo](#useMemo)|Pode ser usado para garantir a referência de um objeto|
+|[useLayoutEffect](#useLayoutEffect)|Usado como useEffect porém executa antes de renderizar a página|
+|[useImperativeHandle](#useImperativeHandle)|Passar funções do componente filho para o componente pai|
+|[Custom Hooks](#Custom Hooks)|Funções que nós mesmos criamos e queremos reutilizar|
+|[useDebugValue](#useDebugValue)|Cria um log e ajuda a depurar o código, necessário instalar react dev tools no navegador|
+|[React Dev Tools](#React Dev Tools)|Ferramenta para visualizar os hooks no navegador|
 
 ## useState
 
